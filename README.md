@@ -4,14 +4,9 @@
 
 - **ReFlowMatching** 为模型训练算法所在目录，请在使用前确保已正确安装 **PyTorch** 及相关深度学习依赖环境。
 - 模型训练完成后，请将生成的 **`latest.ckpt`** 文件移动至**`SimDrone_WS/src/planner/recfm_planner/trained_models/ `** 
-- 训练数据位于：
-  ReFlowMatching/training_data/my_train_data.pkl
-  ```
-  由于 GitHub 文件大小限制，当前提供的数据量较少，仅用于流程演示。
-  如需将训练后的模型实际用于规划算法中，请自行扩充训练数据，以获得更好的规划效果与泛化能力。
+- 训练数据位于**`ReFlowMatching/training_data/my_train_data.pkl`**(由于 GitHub 文件大小限制，当前提供的数据量较少，仅用于流程演示。如需将训练后的模型实际用于规划算法中，请自行扩充训练数据，以获得更好的规划效果与泛化能力。)
 - **SimDrone_WS** 为规划算法工程目录，已在 **Ubuntu 20.04 + ROS Noetic** 环境下编译与测试通过。
 
----
 
 ## 📥 下载与解压
 

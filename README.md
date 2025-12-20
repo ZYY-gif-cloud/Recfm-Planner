@@ -28,7 +28,7 @@ pip install -r requirements.txt
 ```bash
 sudo apt-get install libarmadillo-dev
 cd SimDrone_WS && catkin_make
-source devel/setup.bash
+source .devel/setup.bash
 roslaunch recfm_planner simple_run.launch
 ```
 

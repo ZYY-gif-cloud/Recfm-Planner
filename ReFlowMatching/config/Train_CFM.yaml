@@ -1,0 +1,103 @@
+name: FlowMatching-Policy
+task_name: Train
+_target_: flow_matching_policy.workspace.train_workspace.CFMWorkspace
+shape_meta:
+  cloudpoints: [1024, 3]
+  start_end: [6, 3]
+  init_traj: [18, 4]
+  optimal_traj: [18, 4]
+policy:
+  _target_: flow_matching_policy.policy.flow_matching_policy.FlowMatchingPolicy
+  device: ${training.device}
+  cloudpoints_encoder_cfg:
+    cloudpoints_shape: ${shape_meta.cloudpoints}
+    hidden_dim: 512
+    output_dim: 1024
+    num_layers: 4
+  init_path_encoder_cfg:
+    state_mlp_activation_fn: "ReLU"
+    state_mlp_size: [128, 256, 512]
+    init_path_shape: ${shape_meta.init_traj}
+  start_end_encoder_cfg:
+    state_mlp_activation_fn: "ReLU"
+    state_mlp_size: [64, 128, 256]
+    start_end_shape: ${shape_meta.start_end}
+  timesteps_encoder_cfg:
+    state_mlp_activation_fn: "Mish"
+    timesteps_embed_dim: 128
+    state_mlp_size: [512, 256]
+  conditional_unet1d_cfg:
+    down_dims: [256, 512, 1024]
+    kernel_size: 5
+    n_groups: 8
+    out_traj_shape: ${shape_meta.optimal_traj}
+    conditional_unet1d_activation_fn: "Mish"
+  flow_matcher_cfg:
+    num_train_timesteps: 20
+    num_infer_timesteps: 1
+    acc_n: 19
+    start_time: 0
+    end_time: 1
+training:
+  device: "cuda:0"
+  seed: 42
+  use_ema: True
+  resume: False
+  lr_scheduler: cosine
+  lr_warmup_steps: 500
+  gradient_accumulate_every: 1
+  num_epochs: 2001
+  val_every: 50
+  checkpoint_every: ${training.val_every}
+process_dataset:
+  _target_: flow_matching_policy.dataset.process_dataset.ProcessDataset
+  zarr_path: training_data/my_train_data.pkl
+  seed: 42
+  val_ratio: 0.01
+dataloader:
+  batch_size: 64
+  num_workers: 8
+  shuffle: True
+  pin_memory: True
+  persistent_workers: False
+train_dataloader:
+  batch_size: 64
+  num_workers: 8
+  shuffle: True
+  pin_memory: True
+  persistent_workers: False
+eval_dataloader:
+  batch_size: 1
+  num_workers: 8
+  shuffle: True
+  pin_memory: True
+  persistent_workers: False
+optimizer:
+  _target_: torch.optim.AdamW
+  lr: 1.0e-4
+  betas: [0.95, 0.999]
+  eps: 1.0e-8
+  weight_decay: 1.0e-4
+ema:
+  _target_: flow_matching_policy.model.common.ema_model.EMAModel
+  update_after_step: 0
+  inv_gamma: 1.0
+  power: 0.75
+  min_value: 0.0
+  max_value: 0.9999
+checkpoint:
+  save_ckpt: True
+  topk:
+    monitor_key: test_mean_score
+    mode: max
+    k: 3
+    format_str: 'epoch={epoch:04d}-test_mean_score={test_mean_score:.3f}.ckpt'
+  save_last_ckpt: True
+  save_last_snapshot: True
+hydra:
+  run:
+    dir: ${name}-train-outputs/${now:%Y.%m.%d}/${name}_${task_name}_${now:%H.%M.%S}
+
+
+
+

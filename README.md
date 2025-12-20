@@ -49,7 +49,7 @@ roslaunch recfm_planner simple_run.launch
 ## 🙏 致谢（Acknowledgements）
 
 本项目的规划算法框架基于 **Ego-Planner**，并在此基础上进行了功能扩展与适配。  
-Ego-Planner 在四旋翼局部规划领域展现了优异的实时性与鲁棒性，为本工作的实现提供了重要参考。
+Ego-Planner 在四旋翼局部规划领域展现了优异的性能，为本工作的实现提供了重要参考。
 
 ---
 

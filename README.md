@@ -1,16 +1,10 @@
 # Recfm-Planner
 
-# Recfm-Planner
-
 ## ⚠️ 注意事项（Important Notes）
 
 - **ReFlowMatching** 为模型训练算法所在目录，请在使用前确保已正确安装 **PyTorch** 及相关深度学习依赖环境。
-- 模型训练完成后，请将生成的 **`latest.ckpt`** 文件移动至以下目录：
-  ```
-  SimDrone_WS/src/recfm_planner/trained_models/
-  ```
+- 模型训练完成后，请将生成的 **`latest.ckpt`** 文件移动至**`SimDrone_WS/src/planner/recfm_planner/trained_models/ `** 
 - 训练数据位于：
-  ```
   ReFlowMatching/training_data/my_train_data.pkl
   ```
   由于 GitHub 文件大小限制，当前提供的数据量较少，仅用于流程演示。

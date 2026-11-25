@@ -83,11 +83,23 @@ Ego-Planner demonstrates excellent performance in quadrotor local planning and p
 ## 📚 引用（BibTeX）
 
 ### 中文说明  
-若本项目对你的研究或工程实践有所帮助，欢迎引用我们的相关工作，BibTeX 信息将于后续补充。
+若本项目对你的研究或工程实践有所帮助，欢迎引用我们的相关工作。
 
 ### English  
-If you find this project useful for your research or applications, please consider citing our work.  
-The BibTeX entry will be provided in a future update.
+If you find this project useful for your research or applications, please consider citing our work.
+
+```bibtex
+@INPROCEEDINGS{11776918,
+  author={Zhou, Yuyang and Li, Decai and Zhao, Pinhui and Zhang, Mingyang and He, Yuqing},
+  booktitle={2026 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)}, 
+  title={ResidualFlow: Single-Step Multimodal Trajectory Generation for Quadrotor UAVs via Flow Matching with Residual-Guided Truncation}, 
+  year={2026},
+  volume={},
+  number={},
+  pages={15192-15199},
+  keywords={Trajectory;Optimization;Modeling;Fluid flow;Timing;Tagging;Equations;Costing;Printing;Real-time systems},
+  doi={10.1109/IROS61738.2026.11776918}}
+```
 
 
 
